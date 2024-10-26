@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="RingInterceptorMaui.Views.MainPageView"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#383f44"
+             >
+
+    <Grid Padding="25,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label
+                Grid.ColumnSpan="4"
+                Grid.Row="0"
+                Text="Ring Interceptor"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" 
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"/>      
+        <Label Grid.Column="0" 
+                Grid.ColumnSpan="4"
+                Grid.Row="1"
+                Text="{Binding OutputText}"
+                TextColor="{Binding OutputTextColour}"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="15"/>
+        <Frame Grid.Column="0"
+               Grid.ColumnSpan="4"
+               Grid.Row="3"
+               BorderColor="#b5ac0e">
+            <toolkit:MediaElement
+                ShouldShowPlaybackControls="False"/>
+        </Frame>
+
+        <Button Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="4"
+                Grid.RowSpan="9"
+                BackgroundColor="Transparent"
+                Command="{Binding BackgroundClickedCommand}"></Button>
+            
+        <Entry Placeholder="Duration (s)"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                Margin="15,0,15,0"
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Grid.Row="5"
+                Keyboard="Numeric"
+                Text="{Binding TimerCount}"
+                IsEnabled="{Binding EntryEnabled}"></Entry>
+        <Button
+            BackgroundColor="#2c3438"
+            TextColor="#b5ac0e"
+            FontSize="Large"
+            Text="{Binding DisableBtnText}" 
+            BorderColor="#b5ac0e"
+            BorderWidth="3"
+            CornerRadius="10"
+            HorizontalOptions="Fill" 
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="7"
+            Opacity="{Binding DisableBtnOpacity}"
+            Command="{Binding BtnClickedCommand}"/>
+    </Grid>
+
+</ContentPage>
