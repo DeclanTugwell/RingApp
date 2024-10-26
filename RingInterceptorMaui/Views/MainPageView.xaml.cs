@@ -6,8 +6,13 @@ namespace RingInterceptorMaui.Views
     {
         public MainPageView()
         {
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(ScrollOutputToBottom);
             InitializeComponent();
+        }
+
+        private void ScrollOutputToBottom()
+        {
+            OutputScrollView.ScrollToAsync(OutputLabel, ScrollToPosition.End, true);
         }
     }
 

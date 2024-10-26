@@ -13,7 +13,6 @@ namespace RingInterceptorMaui
         private string _clientApiBaseEndpoint = "https://api.ring.com/clients_api/";
         private string _deviceApiBaseEndpoint = "https://api.ring.com/devices/v1/";
         private string _devicesEndpoint => $"{_clientApiBaseEndpoint}ring_devices";
-        private string _doorbotSettingsEndpoint = "https://api.ring.com/clients_api/doorbots/{0}/";
         private string _deviceSettingsEndpoint = "https://api.ring.com/devices/v1/devices/{0}/settings";
         private OutputWrapper _outputWrapper;
         private RingClient(RingAuthentication authentication, OutputWrapper outputWrapper)

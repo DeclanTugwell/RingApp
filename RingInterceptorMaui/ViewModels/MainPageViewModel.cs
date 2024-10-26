@@ -6,8 +6,11 @@ namespace RingInterceptorMaui.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-        private string _outputText = "";
-        public string OutputText
+        public delegate void ScrollOutput();
+        public event ScrollOutput ScrollOutputEvent;
+
+        private FormattedString _outputText = "";
+        public FormattedString OutputText
         {
             get
             {
@@ -19,23 +22,6 @@ namespace RingInterceptorMaui.ViewModels
                 {
                     _outputText = value;
                     OnPropertyChanged(nameof(OutputText));
-                }
-            }
-        }
-
-        private string _outputTextColour = "";
-        public string OutputTextColour
-        {
-            get
-            {
-                return _outputTextColour;
-            }
-            set
-            {
-                if (value != _outputTextColour)
-                {
-                    _outputTextColour = value;
-                    OnPropertyChanged(nameof(OutputTextColour));
                 }
             }
         }
@@ -89,17 +75,18 @@ namespace RingInterceptorMaui.ViewModels
 
         private bool _ringDoorbellEnabled = true;
 
-        private static readonly Dictionary<OutputType, string> OutputTextColours = new()
+        private static readonly Dictionary<OutputType, Color> OutputTextColours = new()
         {
-            { OutputType.Negative, "DarkRed" },
-            { OutputType.Neutral, "LightGrey" },
-            { OutputType.Positive, "DarkGreen" }
+            { OutputType.Negative, Colors.IndianRed },
+            { OutputType.Neutral, Colors.LightGray },
+            { OutputType.Positive, Colors.DarkGreen }
         };
 
-        public MainPageViewModel()
+        public MainPageViewModel(ScrollOutput scrollOutput)
         {
             BtnClickedCommand = new Command(DisableBtnPressed);
             BackgroundClickedCommand = new Command(BackgroundClicked);
+            ScrollOutputEvent = scrollOutput;
         }
 
         private async void DisableBtnPressed()
@@ -134,8 +121,9 @@ namespace RingInterceptorMaui.ViewModels
         {
             Application.Current.Dispatcher.Dispatch(() =>
             {
-                OutputTextColour = OutputTextColours[outputType];
-                OutputText = textValue;
+                OutputText.Spans.Add(new Span() { Text = $"{textValue}\n", TextColor = OutputTextColours[outputType] });
+                OnPropertyChanged(nameof(OutputText));
+                ScrollOutputEvent.Invoke();
             });
         }
 
@@ -147,7 +135,7 @@ namespace RingInterceptorMaui.ViewModels
             }
             if (_ringClient != null)
             {
-                var targetDevice = (await _ringClient.FetchDevices()).DoorBots.FirstOrDefault();
+                var targetDevice = (await _ringClient.FetchDevices())?.DoorBots.FirstOrDefault();
                 if (targetDevice != null)
                 {
                     var result = await _ringClient.DisableMotionDetection(targetDevice.Id.ToString());
@@ -180,7 +168,7 @@ namespace RingInterceptorMaui.ViewModels
             }
             if (_ringClient != null)
             {
-                var targetDevice = (await _ringClient.FetchDevices()).DoorBots.FirstOrDefault();
+                var targetDevice = (await _ringClient.FetchDevices())?.DoorBots.FirstOrDefault();
                 if (targetDevice != null)
                 {
                     var result = await _ringClient.EnableMotionDetection(targetDevice.Id.ToString());

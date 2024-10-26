@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net8.0-ios</ActiveDebugFramework>
-    <ActiveDebugProfile>Local Device</ActiveDebugProfile>
+    <ActiveDebugProfile>Declan</ActiveDebugProfile>
     <SelectedPlatformGroup>LocalDevice</SelectedPlatformGroup>
     <DeveloperId>MNYV23KY9Y</DeveloperId>
     <DevelopmentTeamId>MNYV23KY9Y</DevelopmentTeamId>

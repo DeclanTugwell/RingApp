@@ -33,31 +33,33 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" 
                 VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"/>      
-        <Label Grid.Column="0" 
-                Grid.ColumnSpan="4"
-                Grid.Row="1"
-                Text="{Binding OutputText}"
-                TextColor="{Binding OutputTextColour}"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                FontAttributes="Bold"
-                FontSize="15"/>
-        <Frame Grid.Column="0"
-               Grid.ColumnSpan="4"
-               Grid.Row="3"
-               BorderColor="#b5ac0e">
-            <toolkit:MediaElement
-                ShouldShowPlaybackControls="False"/>
-        </Frame>
+                HorizontalTextAlignment="Center"/>
 
         <Button Grid.Column="0"
-                Grid.Row="0"
-                Grid.ColumnSpan="4"
-                Grid.RowSpan="9"
-                BackgroundColor="Transparent"
-                Command="{Binding BackgroundClickedCommand}"></Button>
-            
+        Grid.Row="0"
+        Grid.ColumnSpan="4"
+        Grid.RowSpan="9"
+        BackgroundColor="Transparent"
+        Command="{Binding BackgroundClickedCommand}"></Button>
+
+        <Frame Grid.Column="0"
+               Grid.ColumnSpan="4"
+               Grid.Row="1"
+               Grid.RowSpan="3"
+               BorderColor="#b5ac0e"
+               BackgroundColor="#20000000">
+            <ScrollView VerticalScrollBarVisibility="Never"
+                        Margin="-10,-10,-10,-10"
+                        x:Name="OutputScrollView">
+                <Label x:Name="OutputLabel"
+                    FormattedText="{Binding OutputText}"
+                    VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start"
+                    FontAttributes="Bold"
+                    FontSize="15"/>
+            </ScrollView>
+        </Frame>
+
         <Entry Placeholder="Duration (s)"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
